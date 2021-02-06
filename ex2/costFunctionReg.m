@@ -20,10 +20,11 @@ m = length(y);
 
 J = -(sum(y.*log(sigmoid(X*theta)) + (1-y).*log(1-sigmoid(X*theta))))/m + (1/(2*m))*lambda*(sum(theta(2:end).^2));
 
-for j = 1:size(theta)
+grad(1) = sum((sigmoid(X*theta)-y).*X(:,1))./m;
+for j = 2:size(theta)
     grad(j) = sum((sigmoid(X*theta)-y).*X(:,j))./m + lambda/m*theta(j);
 end
-grad(1) = sum((sigmoid(X*theta)-y).*X(:,1))./m;
+
 
 % =============================================================
 
