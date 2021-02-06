@@ -21,13 +21,20 @@ for iter = 1:num_iters
 
 
 
-    for i=1:m
-        theta(i) = theta(i) - (alpha/m)*sum(((X*theta)-y)'*X);
+    temp = zeros(m,1);
+
+    
+    for i=2:m
+        temp(i) = theta(i) - (alpha/m)*sum(((X*theta)-y).*X(:,i));
     end
 
-    theta(1) = theta(i) - (alpha/m)*sum(((X*theta)-y));
-    % error occured: unexpected error: Index exceeds the number of array elements (4)
+    temp(1) = theta(i) - (alpha/m)*sum(((X*theta)-y));
+    
+    for i=1:m
+        theta(i) = temp(i);
+    end
 
+    %  Submission failed: unexpected error: Index exceeds the number of array elements (4)
 
 
 
